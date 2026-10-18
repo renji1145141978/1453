@@ -10,7 +10,7 @@ export async function changeRole(formData: FormData) {
   const userId = String(formData.get("userId"));
   const role = String(formData.get("role"));
   if (!['user', 'admin'].includes(role)) throw new Error("无效角色");
-  if (userId === user.id && role !== "admin") redirect("/admin?message=不能取消自己的管理员权限");
+  if (userId === user.id && role !== "admin") redirect(`/admin?message=${encodeURIComponent("不能取消自己的管理员权限")}`);
 
   const admin = createAdminClient();
   const { error } = await admin.from("profiles").update({ role }).eq("id", userId);

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { logout } from "@/app/login/actions";
@@ -17,7 +18,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang="zh-CN">
       <body>
         <header className="site-header">
-          <Link href="/" className="brand"><span>I</span> Iris</Link>
+          <Link href="/" className="brand"><Image className="brand-image" src="/iris-logo.png" alt="Iris 品牌图标" width={38} height={38} priority /> Iris</Link>
           <nav>
             <Link href="/">首页</Link>
             {user ? (

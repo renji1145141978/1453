@@ -22,7 +22,7 @@ export async function signup(formData: FormData) {
     options: { data: { display_name: String(formData.get("name") || "新用户") } },
   });
   if (error) redirect(`/login?message=${encodeURIComponent("注册失败：" + error.message)}`);
-  redirect("/login?message=注册成功，请检查邮箱完成验证");
+  redirect(`/login?message=${encodeURIComponent("注册成功，请检查邮箱完成验证")}`);
 }
 
 export async function githubLogin() {
@@ -33,7 +33,7 @@ export async function githubLogin() {
     provider: "github",
     options: { redirectTo: `${origin}/auth/callback` },
   });
-  if (error || !data.url) redirect("/login?message=无法启动 GitHub 登录");
+  if (error || !data.url) redirect(`/login?message=${encodeURIComponent("无法启动 GitHub 登录")}`);
   redirect(data.url);
 }
 

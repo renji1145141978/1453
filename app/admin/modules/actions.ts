@@ -9,7 +9,7 @@ import { isBusinessModule } from "@/lib/business";
 export async function createBusinessRecord(formData: FormData) {
   await requireAdmin();
   const module = String(formData.get("module"));
-  if (!isBusinessModule(module)) redirect("/admin?message=无效的业务模块");
+  if (!isBusinessModule(module)) redirect(`/admin?message=${encodeURIComponent("无效的业务模块")}`);
   const admin = createAdminClient();
   let error;
 
