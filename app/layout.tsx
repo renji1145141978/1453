@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  const { data: profile } = user
+    ? await supabase.from("profiles").select("role").eq("id", user.id).maybeSingle()
+    : { data: null };
 
   return (
     <html lang="zh-CN">
@@ -24,7 +27,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             {user ? (
               <>
                 <Link href="/dashboard">工作台</Link>
-                <Link href="/admin">管理后台</Link>
+                <Link href="/products">产品阅览</Link>
+                {profile?.role === "admin" && <Link href="/admin">管理后台</Link>}
                 <form action={logout}><button className="nav-button">退出</button></form>
               </>
             ) : <Link href="/login" className="button small">登录</Link>}

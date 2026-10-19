@@ -19,6 +19,9 @@ export default async function Dashboard({ searchParams }: { searchParams: Promis
         <article><Shield /><span>账户角色</span><strong>{profile?.role === "admin" ? "管理员" : "普通用户"}</strong></article>
         <article><Bell /><span>账户状态</span><strong>正常</strong></article>
       </div>
+      <div className="module-cards customer-modules">
+        <Link href="/products" className="module-card highlight"><Package /><div><strong>产品阅览</strong><span>查看在售产品、价格与库存</span></div><b>→</b></Link>
+      </div>
       {profile?.role === "admin" && <div className="module-cards workbench-modules">
         <Link href="/admin/customers" className="module-card"><Users /><div><strong>客户管理</strong><span>客户档案与跟进</span></div><b>→</b></Link>
         <Link href="/admin/products" className="module-card"><Package /><div><strong>商品管理</strong><span>价格与库存</span></div><b>→</b></Link>
